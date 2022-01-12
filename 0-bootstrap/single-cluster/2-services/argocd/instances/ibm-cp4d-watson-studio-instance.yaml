@@ -20,7 +20,7 @@ spec:
   source:
     chart: ibm-cp4d-watson-studio-instance
     repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 4.0.4
+    targetRevision: 0.1.1
     helm:
       parameters:
       - name: metadata.name
