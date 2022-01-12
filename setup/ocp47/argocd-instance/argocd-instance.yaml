@@ -138,8 +138,22 @@ spec:
         end
 
         hs.status = "Progressing"
-        hs.message = "Waiting for certificate"
-        return hs                 
+        hs.message = "Waiting for control plane to finish provisioning"
+        return hs
+    cpd.ibm.com/ZenService:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.zenStatus == "Completed" then
+            hs.status = "Healthy"
+            hs.message = "Zen Service is provisioned"
+            return hs
+          end
+        end
+
+        hs.status = "Progressing"
+        hs.message = "Waiting for common services to finish provisioning"
+        return hs                          
   applicationSet:
     resources:
       limits:

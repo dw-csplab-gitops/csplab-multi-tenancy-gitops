@@ -1,0 +1,73 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cpd-catalogs
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+  labels:
+    gitops.tier.group: ibm-cloudpak
+    gitops.tier.layer: services
+    gitops.tier.source: git
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: openshift-marketplace
+    server: 'https://kubernetes.default.svc'
+  project: services
+  source:
+    path: operators/cpd-catalogs
+    helm:
+      values: |
+        cpd-catalogs:
+          catalogs:
+            cpdoperator:
+              name: cpd-platform
+              catalog:
+                displayName: Cloud Pak for Data
+                publisher: IBM
+                sourceType: grpc
+                image: icr.io/cpopen/ibm-cpd-platform-operator-catalog@sha256:5231b3066222e2247b3d823d34a10eb190bf6c2bd8e6cffc9e9ec31d22fc2ad0
+                updateStrategy:
+                  registryPoll:
+                    interval: 45m               
+            cpdscheduling:
+              name: ibm-cpd-scheduling-catalog
+              catalog:
+                displayName: IBM Cloud Pak for Data Scheduler Catalog
+                publisher: IBM
+                sourceType: grpc
+                image: icr.io/cpopen/ibm-cpd-scheduler-operator-catalog@sha256:b52374b5d68a54ed0bb3878e216771ebe6ea8c413320a8d6df56fe5ef89c5300
+                updateStrategy:
+                  registryPoll:
+                    interval: 45m             
+            commonservices:
+              name: opencloud-operators
+              catalog:
+                displayName: IBMCS Operators
+                publisher: IBM
+                sourceType: grpc
+                image: icr.io/cpopen/ibm-common-service-catalog@sha256:9ab2741ebcad19a6416a952bf1103900bd9fc1c5525be782744a2c9115982e5b
+                updateStrategy:
+                  registryPoll:
+                    interval: 45m
+
+
+            db2u:
+              name: ibm-db2uoperator-catalog
+              catalog:
+                displayName: IBM Db2U Catalog
+                publisher: IBM
+                sourceType: grpc
+                image: icr.io/cpopen/ibm-db2uoperator-catalog@sha256:a89f6cfb99ae9d744cdde17ece5b59c639bc3849d8cc1405c8ad2465e7ff0f1c
+                imagePullPolicy: Always
+                updateStrategy:
+                  registryPoll:
+                    interval: 45m
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  
+  
+  
