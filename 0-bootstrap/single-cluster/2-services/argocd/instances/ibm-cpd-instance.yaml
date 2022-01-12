@@ -28,11 +28,11 @@ spec:
       - name: spec.license.license
         value: "Enterprise"
       - name: spec.storageClass
-        value: "managed-nfs-storage"
+        value: "ocs-storagecluster-cephfs"
       - name: spec.zenCoreMetadbStorageClass
-        value: "managed-nfs-storage"
+        value: "ocs-storagecluster-cephfs"
       - name: spec.version
-        value: "4.0.1"
+        value: "4.0.4"
   syncPolicy:
     automated:
       prune: true
