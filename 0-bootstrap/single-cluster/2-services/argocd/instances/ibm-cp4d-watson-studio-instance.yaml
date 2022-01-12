@@ -20,7 +20,7 @@ spec:
   source:
     chart: ibm-cp4d-watson-studio-instance
     repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 0.1.1
+    targetRevision: 4.0.4
     helm:
       parameters:
       - name: metadata.name
@@ -35,3 +35,5 @@ spec:
         value: small
       - name: spec.storageClass
         value: managed-nfs-storage
+      - name: spec.version
+        value: "4.0.4"

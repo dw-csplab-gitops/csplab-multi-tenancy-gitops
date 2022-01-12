@@ -18,7 +18,7 @@ spec:
   source:
     chart: ibm-cpd-platform-instance
     repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 0.1.1
+    targetRevision: 4.0.4
     helm:
       parameters:
       - name: metadata.name
