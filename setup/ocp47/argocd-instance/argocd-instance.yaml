@@ -135,6 +135,11 @@ spec:
             hs.message = "Control Plane is provisioned"
             return hs
           end
+          if obj.status.controlPlaneStatus == "Failed" then
+            hs.status = "Degraded"
+            hs.message = "Control Plane provisioning has failed"
+            return hs
+          end
         end
 
         hs.status = "Progressing"
@@ -147,6 +152,11 @@ spec:
           if obj.status.zenStatus == "Completed" then
             hs.status = "Healthy"
             hs.message = "Zen Service is provisioned"
+            return hs
+          end
+          if obj.status.zenStatus == "Failed" then
+            hs.status = "Degraded"
+            hs.message = "Zen Service provisioning has failed"
             return hs
           end
         end
@@ -172,7 +182,26 @@ spec:
 
         hs.status = "Progressing"
         hs.message = "Waiting for Watson Studio to finish provisioning"
-        return hs                                                
+        return hs    
+      cpd.ibm.com/CCS:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.ccsStatus == "Completed" then
+            hs.status = "Healthy"
+            hs.message = "Common Core Services is provisioned"
+            return hs
+          end
+          if obj.status.ccsStatus == "Failed" then
+            hs.status = "Degraded"
+            hs.message = "Common Core Services provisioning has failed"
+            return hs
+          end
+        end
+
+        hs.status = "Progressing"
+        hs.message = "Waiting for Common Core Services to finish provisioning"
+        return hs                                                                                         
   applicationSet:
     resources:
       limits:
