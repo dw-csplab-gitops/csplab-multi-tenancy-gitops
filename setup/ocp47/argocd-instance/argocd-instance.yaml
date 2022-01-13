@@ -153,7 +153,26 @@ spec:
 
         hs.status = "Progressing"
         hs.message = "Waiting for common services to finish provisioning"
-        return hs                          
+        return hs    
+    cpd.ibm.com/WS:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.wsStatus == "Completed" then
+            hs.status = "Healthy"
+            hs.message = "Watson Studio is provisioned"
+            return hs
+          end
+          if obj.status.wsStatus == "Failed" then
+            hs.status = "Degraded"
+            hs.message = "Watson Studio provisioning has failed"
+            return hs
+          end
+        end
+
+        hs.status = "Progressing"
+        hs.message = "Waiting for Watson Studio to finish provisioning"
+        return hs                                                
   applicationSet:
     resources:
       limits:
