@@ -44,8 +44,8 @@ resources:
 #- argocd/instances/ibm-license-service-instance.yaml
 
 ## IBM Catalogs
-- argocd/operators/ibm-catalogs.yaml
-#- argocd/operators/cpd-catalogs.yaml
+#- argocd/operators/ibm-catalogs.yaml
+- argocd/operators/cpd-catalogs.yaml
 
 # Required for IBM MQ
 #- argocd/instances/openldap.yaml
