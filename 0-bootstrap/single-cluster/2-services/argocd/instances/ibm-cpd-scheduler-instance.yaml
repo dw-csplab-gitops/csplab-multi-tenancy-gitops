@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cpd-scheduler-instance
+  annotations:
+    argocd.argoproj.io/sync-wave: "240"
+  labels:
+    gitops.tier.group: cntk
+    gitops.tier.layer: services
+    gitops.tier.source: git
+spec:
+  destination:
+    namespace: ibm-common-services
+    server: 'https://kubernetes.default.svc'
+  project: services
+  source:
+    chart: ibm-cpd-scheduling-instance
+    repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
+    targetRevision: 0.1.0
+    helm:
+      parameters:
+        - name: storageClass
+          value: "ocs-storagecluster-cephfs"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

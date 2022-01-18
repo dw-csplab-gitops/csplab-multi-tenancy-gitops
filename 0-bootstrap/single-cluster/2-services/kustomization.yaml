@@ -28,6 +28,7 @@ resources:
 - argocd/instances/ibm-cp4d-watson-studio-instance.yaml
 - argocd/operators/ibm-cpd-platform-operator.yaml
 - argocd/operators/ibm-cpd-scheduling-operator.yaml
+- argocd/instances/ibm-cpd-scheduler-instance.yaml
 - argocd/instances/ibm-cpd-instance.yaml
 
 ## Cloud Pak for Security
