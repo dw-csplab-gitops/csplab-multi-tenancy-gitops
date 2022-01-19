@@ -183,44 +183,44 @@ spec:
         hs.status = "Progressing"
         hs.message = "Waiting for Watson Studio to finish provisioning"
         return hs    
-      cpd.ibm.com/CCS:
-        health.lua: |
-          hs = {}
-          if obj.status ~= nil then
-            if obj.status.ccsStatus == "Completed" then
-              hs.status = "Healthy"
-              hs.message = "Common Core Services is provisioned"
-              return hs
-            end
-            if obj.status.ccsStatus == "Failed" then
-              hs.status = "Degraded"
-              hs.message = "Common Core Services provisioning has failed"
-              return hs
-            end
+    cpd.ibm.com/CCS:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.ccsStatus == "Completed" then
+            hs.status = "Healthy"
+            hs.message = "Common Core Services is provisioned"
+            return hs
           end
-
-          hs.status = "Progressing"
-          hs.message = "Waiting for Common Core Services to finish provisioning"
-          return hs                
-      scheduler.spectrumcomputing.ibm.com/Scheduling:
-        health.lua: |
-          hs = {}
-          if obj.status ~= nil then
-            if obj.status.cpd-schedulingStatus == "Completed" then
-              hs.status = "Healthy"
-              hs.message = "CPD Scheduler is provisioned"
-              return hs
-            end
-            if obj.status.cpd-schedulingStatus == "Failed" then
-              hs.status = "Degraded"
-              hs.message = "CPD Scheduler provisioning has failed"
-              return hs
-            end
+          if obj.status.ccsStatus == "Failed" then
+            hs.status = "Degraded"
+            hs.message = "Common Core Services provisioning has failed"
+            return hs
           end
+        end
 
-          hs.status = "Progressing"
-          hs.message = "Waiting for CPD Scheduler to finish provisioning"
-          return hs                                                                                                                     
+        hs.status = "Progressing"
+        hs.message = "Waiting for Common Core Services to finish provisioning"
+        return hs                
+    scheduler.spectrumcomputing.ibm.com/Scheduling:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.cpd-schedulingStatus == "Completed" then
+            hs.status = "Healthy"
+            hs.message = "CPD Scheduler is provisioned"
+            return hs
+          end
+          if obj.status.cpd-schedulingStatus == "Failed" then
+            hs.status = "Degraded"
+            hs.message = "CPD Scheduler provisioning has failed"
+            return hs
+          end
+        end
+
+        hs.status = "Progressing"
+        hs.message = "Waiting for CPD Scheduler to finish provisioning"
+        return hs                                                                                                                     
   applicationSet:
     resources:
       limits:
