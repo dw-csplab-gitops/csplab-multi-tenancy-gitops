@@ -335,3 +335,9 @@ rules:
       - ws.cpd.ibm.com
     resources:
       - ws
+  - verbs:
+      - '*'
+    apiGroups:
+      - scheduler.spectrumcomputing.ibm.com
+    resources:
+      - Scheduling
