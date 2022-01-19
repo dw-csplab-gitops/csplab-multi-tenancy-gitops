@@ -14,9 +14,9 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: services
   source:
-    chart: ibm-cpd-scheduling-instance
+#    chart: ibm-cpd-scheduling-instance
     repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 0.1.0
+    path: instances/ibm-cpd-scheduling-instance
     helm:
       parameters:
         - name: storageClass
