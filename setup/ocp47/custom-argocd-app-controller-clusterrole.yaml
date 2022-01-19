@@ -340,4 +340,4 @@ rules:
     apiGroups:
       - scheduler.spectrumcomputing.ibm.com
     resources:
-      - Scheduling
+      - scheduling
