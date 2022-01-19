@@ -207,14 +207,13 @@ spec:
         hs = {}
         if obj.status ~= nil then
           if obj.status['cpd-schedulingStatus'] ~= nil then
+            hs.message = obj.status.message
             if obj.status['cpd-schedulingStatus'] == "Completed" then
               hs.status = "Healthy"
-              hs.message = "CPD Scheduler is provisioned"
               return hs
             end
             if obj.status['cpd-schedulingStatus'] == "Failed" then
               hs.status = "Degraded"
-              hs.message = "CPD Scheduler provisioning has failed"
               return hs
             end
           end
