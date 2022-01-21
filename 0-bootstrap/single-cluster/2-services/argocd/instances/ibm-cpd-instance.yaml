@@ -21,7 +21,7 @@ spec:
     path: instances/ibm-cpd-instance
     helm:
       values: |
-        ibmcpdplatforminstance:
+        ibm-cpd-platform-instance:
           name: ibmcpd-cr
           spec:
             license:
