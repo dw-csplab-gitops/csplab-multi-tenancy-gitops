@@ -7,7 +7,7 @@ metadata:
   labels:
     gitops.tier.group: ibm-cloudpak
     gitops.tier.layer: services
-    gitops.tier.source: helm-dw
+    gitops.tier.source: git
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -16,23 +16,20 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: services
   source:
-    chart: ibm-cpd-platform-instance
-    repoURL: "https://dw-csplab-gitops.github.io/csplab-multi-tenancy-gitops-charts" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 0.1.1
+    #chart: ibm-cpd-platform-instance
+    repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
+    path: instalces/ibm-cpd-instance
     helm:
-      parameters:
-      - name: metadata.name
-        value: "ibmcpd-cr"
-      - name: spec.license.accept
-        value: "true"
-      - name: spec.license.license
-        value: "Enterprise"
-      - name: spec.storageClass
-        value: "ocs-storagecluster-cephfs"
-      - name: spec.zenCoreMetadbStorageClass
-        value: "ocs-storagecluster-cephfs"
-      - name: spec.version
-        value: "4.0.4"
+      values: |
+        ibmcpdplatforminstance:
+          name: ibmcpd-cr
+          spec:
+            license:
+              accept: true
+              license: Enterprise
+            storageClass: "ocs-storagecluster-cephfs"
+            zenCoreMetadbStorageClass: "ocs-storagecluster-cephfs"
+            version: "4.0.4"
   syncPolicy:
     automated:
       prune: true
