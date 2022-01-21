@@ -7,7 +7,7 @@ metadata:
   labels:
     gitops.tier.group: ibm-cloudpak
     gitops.tier.layer: services
-    gitops.tier.source: helm
+    gitops.tier.source: helm-dw
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -17,7 +17,7 @@ spec:
   project: services
   source:
     chart: ibm-cpd-platform-instance
-    repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
+    repoURL: "https://dw-csplab-gitops.github.io/csplab-multi-tenancy-gitops-charts" # Populated by kustomize patches in 2-services/kustomization.yaml
     targetRevision: 0.1.1
     helm:
       parameters:
