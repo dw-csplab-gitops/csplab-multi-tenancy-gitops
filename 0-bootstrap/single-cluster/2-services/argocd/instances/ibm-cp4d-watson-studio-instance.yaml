@@ -7,7 +7,7 @@ metadata:
   labels:
     gitops.tier.group: ibm-cloudpak
     gitops.tier.layer: services
-    gitops.tier.source: helm
+    gitops.tier.source: git
 spec:
   syncPolicy:
     automated:
@@ -18,22 +18,23 @@ spec:
     server: https://kubernetes.default.svc
   project: services
   source:
-    chart: ibm-cp4d-watson-studio-instance
+    #chart: ibm-cp4d-watson-studio-instance
     repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 0.1.1
+    path: instances/ibm-cp4d-watson-studio-instance
     helm:
-      parameters:
-      - name: metadata.name
-        value: ws-cr
-      - name: spec.docker_registry_prefix
-        value: cp.icr.io/cp/cpd
-      - name: spec.license.accept
-        value: "true"
-      - name: spec.license.license
-        value: Enterprise
-      - name: spec.scaleConfig
-        value: small
-      - name: spec.storageClass
-        value: "ocs-storagecluster-cephfs"
-      - name: spec.version
-        value: "4.0.4"
+      values: | 
+        spec:
+          docker_registry_prefix: cp.icr.io/cp/cpd
+          ignoreForMaintenance: "false"
+          license:
+            accept: "true"
+            license: Enterprise
+          scaleConfig: small
+          storageClass: managed-nfs-storage
+
+
+# Note: version is missing from the helm chart at this time.
+
+
+
+
