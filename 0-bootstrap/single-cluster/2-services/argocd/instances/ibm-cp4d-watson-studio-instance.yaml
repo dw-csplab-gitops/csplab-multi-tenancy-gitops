@@ -30,7 +30,7 @@ spec:
             accept: "true"
             license: Enterprise
           scaleConfig: small
-          storageClass: managed-nfs-storage
+          storageClass: "ocs-storagecluster-cephfs"
 
 
 # Note: version is missing from the helm chart at this time.
