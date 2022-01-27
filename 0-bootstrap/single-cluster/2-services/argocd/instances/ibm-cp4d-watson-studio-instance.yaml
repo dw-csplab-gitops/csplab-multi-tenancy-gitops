@@ -23,14 +23,16 @@ spec:
     path: instances/ibm-cp4d-watson-studio-instance
     helm:
       values: | 
-        spec:
-          docker_registry_prefix: cp.icr.io/cp/cpd
-          ignoreForMaintenance: "false"
-          license:
-            accept: "true"
-            license: Enterprise
-          scaleConfig: small
-          storageClass: "ocs-storagecluster-cephfs"
+        ibm-cp4d-watson-studio-instance:
+          metadata:
+            name: ibmcpd-cr
+          spec:
+            license:
+              accept: true
+              license: Enterprise
+            storageClass: "ocs-storagecluster-cephfs"
+            zenCoreMetadbStorageClass: "ocs-storagecluster-cephfs"
+            version: "4.0.4"
 
 
 # Note: version is missing from the helm chart at this time.
